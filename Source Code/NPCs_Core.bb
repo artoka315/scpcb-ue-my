@@ -2092,7 +2092,7 @@ Function UpdateNPCs%()
 											If Abs(DeltaYaw(n\Collider, me\Collider)) <= 60.0 Then
 												PlaySound2(DamageSFX[Rand(5, 8)], Camera, n\Collider)
 												InjurePlayer(Rnd(0.55, 0.85) * DifficultyDMGMult, 0.0, 0.0, Rnd(0.25, 0.3) * DifficultyDMGMult, 0.2)
-												
+												CameraShake = 0.5
 												If me\Injuries > 3.0 Then
 													msg\DeathMsg = Format(GetLocalString("death", "0492killed"), SubjectName)
 													Kill(True)
@@ -3062,10 +3062,12 @@ Function UpdateNPCs%()
 												If wi\HazmatSuit > 0 Then
 													PlaySound_Strict(LoadTempSound("SFX\General\BodyFall.ogg"))
 													InjurePlayer(Rnd(0.5))
+                                                                                                        CameraShake = 0.5
+ 
 												Else
 													PlaySound_Strict(DamageSFX[Rand(9, 10)])
 													InjurePlayer(Rnd(0.75, 1.15) * DifficultyDMGMult, 0.0, 100.0, Rnd(0.35, 0.4) * DifficultyDMGMult, 0.2)
-													
+													CameraShake = 0.9
 													If me\Injuries > 3.0 Then
 														If PlayerRoom\RoomTemplate\Name = "room2_ez" Then
 															msg\DeathMsg = GetLocalString("death", "895.offices")
@@ -3535,6 +3537,7 @@ Function UpdateNPCs%()
 										If DistanceSquared(n\EnemyX, EntityX(n\Collider), n\EnemyZ, EntityZ(n\Collider)) < 2.25 Then
 											PlaySound_Strict(DamageSFX[11])
 											InjurePlayer(Rnd(1.5, 2.5), 0.0, 500.0, Rnd(0.2, 0.75))
+                                                                                        me\BigCameraShake = 2.0
 										Else
 											SetNPCFrame(n, 449.0)
 										EndIf
@@ -4058,6 +4061,7 @@ Function UpdateNPCs%()
 										If Abs(DeltaYaw(n\Collider, me\Collider)) <= 60.0 Then
 											PlaySound2(DamageSFX[Rand(11, 12)], Camera, n\Collider)
 											InjurePlayer(Rnd(0.45, 0.75) * DifficultyDMGMult, 0.0, 500.0, Rnd(0.2, 0.25) * DifficultyDMGMult)
+                                                                                        CameraShake = 0.4
 										EndIf
 									Else
 										PlaySound2(MissSFX, Camera, n\Collider, 2.5)
@@ -4376,6 +4380,7 @@ Function UpdateNPCs%()
 									Else
 										InjurePlayer(Rnd(0.65, 1.1) * DifficultyDMGMult, 0.0, 500.0, Rnd(0.3, 0.35) * DifficultyDMGMult, 0.2)
 										PlaySound2(DamageSFX[Rand(11, 12)], Camera, n\Collider)
+                                                                                CameraShake = 0.9
 										If me\Injuries > 10.0 Then
 											If PlayerRoom\RoomTemplate\Name = "dimension_1499"
 												msg\DeathMsg = GetLocalString("death", "1499.dimension")
@@ -4580,6 +4585,7 @@ Function UpdateNPCs%()
 										If Abs(DeltaYaw(n\Collider, me\Collider)) <= 60.0 Then
 											PlaySound_Strict(DamageSFX[Rand(5, 8)])
 											InjurePlayer(Rnd(0.4, 0.7) * DifficultyDMGMult, 1.0 + SelectedDifficulty\AggressiveNPCs, 0.0, Rnd(0.175, 0.225) * DifficultyDMGMult, 0.2)
+                                                                                        CameraShake = 0.6
 											If me\Injuries > 3.0 Then
 												msg\DeathMsg = Format(GetLocalString("death", "008"), SubjectName)
 												Kill(True)
